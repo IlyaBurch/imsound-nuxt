@@ -1,8 +1,8 @@
 <template>
-  <div class = 'index__loader' v-if="isLoading">
+  <!-- <div class = 'index__loader' v-if="isLoading">
     <ProgressSpinner/>
-  </div>
-  <main v-else class="main">
+  </div> -->
+  <main class="main">
     <IndexWidget/>
     <CategorySwiper/>
     <TabContent/>
@@ -18,14 +18,14 @@
   import CategorySwiper from "@/components/main/Index/CategorySwiper.vue";
   import TabContent from "@/components/main/Index/TabContent.vue";
 
-  const API_BASE_URL = import.meta.env.VITE_APP_API_BASE_URL;
+  // const API_BASE_URL = import.meta.env.VITE_APP_API_BASE_URL;
 
   let data = ref <IndexResponse | null>(null)
   let isLoading = ref(true);
 
-  // const imagesArray = [];
+  const imagesArray = [];
 
-  // let slidesInfo : any = computed(() => data.value?.sliders_and_banners.sliders)
+  let slidesInfo : any = computed(() => data.value?.sliders_and_banners.sliders)
 
   const fetchData = async () => {
     isLoading.value = true;
@@ -47,6 +47,12 @@
   })  
 
   // provide('slidesInfo', slidesInfo)
+  useSeoMeta({
+  title: 'IMSOUND',
+  ogTitle: 'IMSOUND',
+  description: 'Интернет-магазин световой и музыкальной техники IMSOUND',
+  ogDescription: 'Интернет-магазин световой и музыкальной техники IMSOUND',
+})
 </script>
 
 <style scoped>

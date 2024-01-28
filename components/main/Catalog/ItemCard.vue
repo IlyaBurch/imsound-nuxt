@@ -5,8 +5,8 @@
         <img class="item__pic" src="@/abbey-road.webp" />
       </picture>
       <section>
-        <p class="item__name">{{data.name}}</p>
-        <p class="item__price">{{data.price}}</p>
+        <Button link class="item__name">{{data.name}}</Button>
+        <Button link  class="item__price">{{data.price}}</Button>
       </section>
       <ButtonBaseButton>Купить</ButtonBaseButton>
     </article>
@@ -27,7 +27,7 @@ const props = defineProps(['data']);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 24px 12px 24px 12px;
+  /* padding: 24px 12px 24px 12px; */
 }
 .item__pic {
   height: 100px;

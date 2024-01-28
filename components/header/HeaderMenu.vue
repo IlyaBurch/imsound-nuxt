@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <router-link to="/">
-      <div class="brand-logo">IMSOUND</div>
+      <Button link class="brand-logo">IMSOUND</Button>
     </router-link>
     <ButtonBurgerButton class="burger" />
     <MainCatalogAsideMenu/>

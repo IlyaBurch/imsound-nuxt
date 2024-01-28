@@ -3,7 +3,12 @@
 </template>
   
 <script setup lang="ts">
-  
+    useSeoMeta({
+  title: 'IMSOUND || Каталог',
+  ogTitle: 'IMSOUND || Каталог',
+  description: 'Каталог интернет-магазина световой и музыкальной техники IMSOUND',
+  ogDescription: 'Каталог интернет-магазина световой и музыкальной техники IMSOUND',
+})
   // import CatalogWidget from "@/widgets/main/Catalog/CatalogWidget.vue";
 </script>
   

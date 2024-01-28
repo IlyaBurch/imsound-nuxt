@@ -7,6 +7,7 @@ export default defineNuxtConfig({
   ],
   primevue: {},
   swiper: {},
+  css: ['./assets/main.css']
   // ssr: true,
   // runtimeConfig: {
   //   apiSecret: 'process.env.API_BASE_URL', // can be overridden by NUXT_API_SECRET environment variable
