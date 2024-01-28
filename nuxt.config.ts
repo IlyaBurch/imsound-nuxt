@@ -7,4 +7,5 @@ export default defineNuxtConfig({
   ],
   primevue: {},
   swiper: {},
+  target: 'static'
 })
