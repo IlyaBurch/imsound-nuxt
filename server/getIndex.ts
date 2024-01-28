@@ -1,5 +1,7 @@
-const API_BASE_URL = import.meta.env.VITE_APP_API_BASE_URL;
-console.log('API_BASE_URL:', API_BASE_URL);
+// console.log('API_BASE_URL:', API_BASE_URL);
+// const runtimeConfig = useRuntimeConfig()
+// const API_BASE_URL = runtimeConfig.apiSecret
+const API_BASE_URL = "https://imsound.ru/api"
 
 export interface IndexResponse {
   breadcrumbs:         Array<string[]>;
