@@ -4,11 +4,13 @@
       <Button link class="brand-logo">IMSOUND</Button>
     </router-link>
     <ButtonBurgerButton class="burger" />
-    <MainCatalogAsideMenu/>
+    <AsideMenu/>
   </div>
 </template>
 
 <script setup lang="ts">
+import AsideMenu from './AsideMenu.vue';
+
 // import BurgerButton from "@/shared/button/BurgerButton.vue";
 // import AsideMenu from "../main/Catalog/AsideMenu.vue";
 </script>

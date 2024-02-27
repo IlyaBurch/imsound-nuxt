@@ -1,52 +1,52 @@
 <template>
-  <!-- <div class = 'index__loader' v-if="isLoading">
-    <ProgressSpinner/>
-  </div> -->
   <main class="main">
-    <IndexWidget/>
-    <CategorySwiper/>
-    <TabContent/>
+    <!-- <MainIndexWidget/> -->
+    <!-- <MainIndexCategorySwiper/> -->
+    <MainIndexTabContent :data="data"/>
   </main>
 </template>
 
 <script setup lang="ts">
-  import { ref, onMounted, computed, onBeforeMount, provide } from "vue"
-  import { getIndexData } from "@/server/getIndex"
-  import type { IndexResponse } from "@/server/getIndex";
+  // import { ref, onMounted, computed, onBeforeMount, provide } from "vue"
+  // import { getIndexData } from "@/server/getIndex"
+  // import type { IndexResponse } from "@/server/getIndex";
 
-  import IndexWidget from '@/components/main/Index/IndexWidget.vue';
-  import CategorySwiper from "@/components/main/Index/CategorySwiper.vue";
-  import TabContent from "@/components/main/Index/TabContent.vue";
+  // import IndexWidget from '@/components/main/Index/IndexWidget.vue';
+  // import CategorySwiper from "@/components/main/Index/CategorySwiper.vue";
+  // import TabContent from "@/components/main/Index/TabContent.vue";
 
   // const API_BASE_URL = import.meta.env.VITE_APP_API_BASE_URL;
 
-  let data = ref <IndexResponse | null>(null)
-  let isLoading = ref(true);
+  // let data = ref <IndexResponse | null>(null)
+  // let isLoading = ref(true);
 
-  const imagesArray = [];
+  // const imagesArray = [];
 
-  let slidesInfo : any = computed(() => data.value?.sliders_and_banners.sliders)
 
-  const fetchData = async () => {
-    isLoading.value = true;
+
+  // const fetchData = async () => {
+  //   isLoading.value = true;
     
-    try {
-      const response = await getIndexData();
-      if (response) {
-        data.value = response;
-      }
-    } catch (error) {
-      console.log("Ошибка загрузки данных с серверва:", error)
-    } finally {
-      isLoading.value = false;
-    }
-  }
+  //   try {
+  //     const response = await getIndexData();
+  //     if (response) {
+  //       data.value = response;
+  //     }
+  //   } catch (error) {
+  //     console.log("Ошибка загрузки данных с серверва:", error)
+  //   } finally {
+  //     isLoading.value = false;
+  //   }
+  // }
 
-  onBeforeMount(() => {
-    fetchData();
-  })  
-
+  // onBeforeMount(() => {
+  //   fetchData();
+  // })  
+  // let slidesInfo : any = computed(() => data.results.sliders_and_banners.sliders)
   // provide('slidesInfo', slidesInfo)
+  const API_BASE_URL = 'https://imsound.ru/api';
+  const { pending, data } = useFetch(`${API_BASE_URL}/index/`, {})
+  
   useSeoMeta({
   title: 'IMSOUND',
   ogTitle: 'IMSOUND',

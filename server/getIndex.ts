@@ -79,28 +79,28 @@ export interface Subcategory {
 }
 
 
-export const getIndexData = (): Promise<IndexResponse| any>  => {
-  return fetch(`${API_BASE_URL}/index`)
-    .then(async (response) => {
-      if (!response.ok) {
-        throw new Error(`Error fetching data: ${response.statusText}`);
-      }
-      try {
-        const responseData = await response.json();
-        console.log('Parsed data from server:', responseData);
+// export const getIndexData = (): Promise<IndexResponse| any>  => {
+//   return fetch(`${API_BASE_URL}/index`)
+//     .then(async (response) => {
+//       if (!response.ok) {
+//         throw new Error(`Error fetching data: ${response.statusText}`);
+//       }
+//       try {
+//         const responseData = await response.json();
+//         console.log('Parsed data from server:', responseData);
 
-        return responseData;
-      } catch (jsonError) {
-        console.error('Error parsing JSON:', jsonError);
-        throw jsonError;
-      }
-    })
-    .catch((error) => {
-      throw error;
-    });
-};
+//         return responseData;
+//       } catch (jsonError) {
+//         console.error('Error parsing JSON:', jsonError);
+//         throw jsonError;
+//       }
+//     })
+//     .catch((error) => {
+//       throw error;
+//     });
+// };
 
-export const getCategory = () => Promise.resolve(getIndexData);
+// export const getCategory = () => Promise.resolve(getIndexData);
 
-export default getIndexData;
+// export default getIndexData;
 

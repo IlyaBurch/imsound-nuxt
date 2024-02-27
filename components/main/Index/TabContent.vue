@@ -1,9 +1,9 @@
 <template>
 <TabView>
     <TabPanel header="Рекомендации" class="tab__name">
-      <ProgressSpinner v-if="isLoading"/>
-      <div class="items" v-else>
-        <ItemCard v-for="slide in slides" :data="slide"/>
+      <!-- <ProgressSpinner v-if="pending"/> -->
+      <div class="items">
+        <ItemCard v-for="slide in props.data?.featured_products" :data="slide" :isFucked="true"/>
       </div>
     </TabPanel>
     <TabPanel header="Новинки" class="tab__name" :disabled="true">
@@ -28,7 +28,7 @@ import TabPanel from 'primevue/tabpanel';
 import ProgressSpinner from 'primevue/progressspinner';
 import ItemCard from '../Catalog/ItemCard.vue';
 
-import { extractFeatured } from '~/server/indexTabs';
+// import { extractFeatured } from '~/server/indexTabs';
 
 interface FeaturedProduct {
   id:                  number;
@@ -51,19 +51,28 @@ interface FeaturedProduct {
 }
 
 
-let slides : any = ref({})
-let isLoading = ref(true)
+// const API_BASE_URL = 'https://imsound.ru/api';
+// const { pending, data } = useFetch(`${API_BASE_URL}/index`, {})
 
-onMounted(() => {
-  extractFeatured().then((images) => {
-    slides = images
-    console.log(slides)
-    isLoading.value = false;
-  })
-  .catch((error) => {
-    console.error('Error:', error);
-  });
-});
+// console.log(data)
+
+const props = defineProps(['data'])
+console.log(props)
+// let slides : any = props?.featured_products;
+// console.log(slides)
+// let isLoading = ref(true)
+
+// onMounted(() => {
+//   extractFeatured().then((images) => {
+//     slides = images
+//     console.log(slides)
+//     isLoading.value = false;
+//   })
+//   .catch((error) => {
+//     console.error('Error:', error);
+//   });
+// });
+
 </script>
 
 <style scoped>

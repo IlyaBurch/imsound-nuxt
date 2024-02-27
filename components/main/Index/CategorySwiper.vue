@@ -1,6 +1,9 @@
 <template>
     <p class="category__header">Категории товаров</p>
-    <Swiper v-if="isLoading"
+    <div v-if="pending">
+      <Skeleton />
+    </div>
+    <Swiper v-else>
       class="category__swiper"
       :slides-per-view="1"
       :space-between="spaceBetween"
@@ -10,7 +13,7 @@
       }"
       :breakpoints="{
         320:{
-          slidesPerVies: 2,
+          slidesPerView: 2,
         },
         768: {
           slidesPerView: 2,
@@ -38,8 +41,9 @@
   <script setup lang="ts">
     import { onMounted, ref } from 'vue';
     import 'swiper/swiper-bundle.css';
-    import getIndexData from '@/server/getIndex';
-    import { extractCategory } from '@/server/categoryHelper';
+    // import getIndexData from '@/server/getIndex';
+    // import { extractCategory } from '@/server/categoryHelper';
+    import type Skeleton from 'primevue/skeleton';
   
     const isLoading = ref(false)
     let slides: any = ref({});
@@ -47,15 +51,15 @@
     let onSlideChange: any = ref(null);
     let spaceBetween: any = 16;
 
+    const API_BASE_URL = 'https://imsound.ru/api';
+
+    // сonst paginationParam = 9;
+
+
+
     onMounted(() => {
-      extractCategory().then((category) => {
-        slides = category
-        console.log(slides)
-        isLoading.value = true;
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+      const { pending, data } = useFetch(`${API_BASE_URL}/index`, {})
+      slides = data?.categoies
       onProgress.value = (e : any) => {
       const [swiper, progress] = e.detail;
         console.log(progress)
@@ -65,6 +69,65 @@
         console.log('slide changed')
       }
     });
+
+// import { onMounted, ref } from 'vue';
+
+// import 'swiper/swiper-bundle.css';
+
+// // import { useFetch } from '@vueuse/core';
+
+// // import { extractCategory } from '@/server/categoryHelper';
+
+// import type Skeleton from 'primevue/skeleton';
+
+
+// const isLoading = ref(false);
+
+// let slides: any = ref({});
+
+// let onProgress: any = ref(null);
+
+// let onSlideChange: any = ref(null);
+
+// let spaceBetween: any = 16;
+
+
+// const API_BASE_URL = 'https://imsound.ru/api';
+
+
+// const fetchData = async () => {
+
+//   const { pending, data } = await useFetch(`${API_BASE_URL}/index`, {
+
+//     // lazy: true,
+
+//   });
+
+//   slides = data?.categories;
+
+// };
+
+
+// onMounted(async () => {
+
+//   await fetchData();
+
+//   onProgress.value = (e: any) => {
+
+//     const [swiper, progress] = e.detail;
+
+//     console.log(progress);
+
+//   };
+
+
+//   onSlideChange.value = (e: any) => {
+
+//     console.log('slide changed');
+
+//   };
+
+// });
   </script>
   
   <style scoped>

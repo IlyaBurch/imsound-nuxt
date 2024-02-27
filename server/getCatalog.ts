@@ -82,30 +82,32 @@ export type CatalogData = {
 
 
 
-export const getCatalogData = (itemsCount = '8'): Promise<CatalogData | any>  => {
-  return fetch(`${API_BASE_URL}/catalog`, {
-    headers: {
-      'PAGINATIONPARAM': itemsCount,
-    }})
-    .then(async (response) => {
-      if (!response.ok) {
-        throw new Error(`Error fetching data: ${response.statusText}`);
-      }
-      try {
-        const responseData = await response.json();
-        console.log('Parsed data from server:', responseData);
+// export const getCatalogData = (itemsCount = '8'): Promise<CatalogData | any>  => {
+// export const getCatalogData = (itemsCount = '8')  => {
+//   return fetch(`${API_BASE_URL}/catalog`, {
+//     method: 'GET',
+//     headers: {
+//       'PAGINATIONPARAM': itemsCount,
+//     }})
+//     .then(async (response) => {
+//       if (!response.ok) {
+//         throw new Error(`Error fetching data: ${response.statusText}`);
+//       }
+//       try {
+//         const responseData = await response.json();
+//         console.log('Parsed data from server:', responseData);
 
-        return responseData;
-      } catch (jsonError) {
-        console.error('Error parsing JSON:', jsonError);
-        throw jsonError;
-      }
-    })
-    .catch((error) => {
-      throw error;
-    });
-};
+//         return responseData;
+//       } catch (jsonError) {
+//         console.error('Error parsing JSON:', jsonError);
+//         throw jsonError;
+//       }
+//     })
+//     .catch((error) => {
+//       throw error;
+//     });
+// };
 
-export default getCatalogData;
+// export default getCatalogData;
 
 

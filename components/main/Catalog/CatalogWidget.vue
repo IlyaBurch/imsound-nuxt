@@ -1,11 +1,12 @@
 <template>
-  <div class="catalog__loader" v-if="isLoading">
+  <div class="catalog__loader" v-if="status==='pending'">
     <ProgressSpinner/>
   </div>
-  <div v-else>
-    <MainCatalogFilter class="filters" />
+  <div v-if="status==='success'">
+    <CatalogButtons class="filters" /> 
     <p class="items__number">Количество товаров: {{data?.count}}</p>
-    <p>{{ itemsList }}</p>
+    <!-- <p>{{ itemsList }}</p> -->
+    <!-- <p>{{ data.count }}</p> -->
     <div class="items" >
       <MainCatalogItemCard v-for="item in data?.results.product_list" :data="item"/>
     </div>
@@ -15,43 +16,21 @@
 
 <script setup lang="ts">
 import {onMounted, ref} from 'vue'
-// import CatalogFilter from "@/widgets/main/Catalog/CatalogFilter.vue";
-// import ItemCard from "@/widgets/main/Catalog/ItemCard.vue";
-// // import ProgressSpinner from 'primevue/progressspinner';
-// import Paginator from 'primevue/paginator';
 
+// import { getCatalogData } from "@/server/getCatalog";
+// import type { ApiResponse  } from "@/server/getCatalog";
+import CatalogButtons from './CatalogButtons.vue';
 
-import { getCatalogData } from "@/server/getCatalog";
-import type { ApiResponse  } from "@/server/getCatalog";
+// let data = ref<any>(null);
 
-let data = ref< ApiResponse | null>(null);
 let isLoading = ref(true);
 // const getData = getCatalogData;data.results.product_list
+const API_BASE_URL = 'https://imsound.ru/api';
 
-const fetchData = async () => {
-  console.log('fetchData is called');
-  
-  isLoading.value = true;
+// const paginationParam = 9;
 
-  try {
-    const response = await getCatalogData('10');
-    console.log('Response from server:', response);
+const { data, status } = await useLazyFetch(`${API_BASE_URL}/catalog/`, {})
 
-    if (response) {
-      data.value = response;
-    }
-  } catch (error) {
-    console.error('Ошибка загрузки данных с сервера:', error);
-  } finally {
-    isLoading.value = false;
-  }
-} 
-
-onMounted(() => {
-  fetchData()
-})
-
-const itemsList = data.value?.results.product_list
 </script>
 
 <style scoped>
